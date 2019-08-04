@@ -18,6 +18,10 @@ let wordInProgress = [];
 let currentGuess = "";
 let guessedLetters = [];
 let remainingGuesses = 5;
+let score = 0;
+
+document.querySelector("#score").innerHTML = score;
+document.querySelector("#remaining-guesses").innerHTML = remainingGuesses;
 
 playGame = () => {
   let letters = guessThisWord.split("");
@@ -30,6 +34,9 @@ playGame = () => {
   for (let k = 0; k < letters.length; k++) {
     wordInProgress.push("_");
   }
+  document.querySelector("#guess-this-word").innerHTML = wordInProgress.join(
+    " "
+  );
   console.log(wordInProgress);
 };
 
@@ -39,6 +46,7 @@ let checkGuess = letter => {
     guessedLetters.push(currentGuess);
     console.log("guessed Letters", guessedLetters);
   }
+  //   document.querySelector("#letters-guessed").innerHTML = guessedLetters;
 
   let isInWord = false;
 
@@ -55,6 +63,8 @@ let checkGuess = letter => {
         // document.querySelector("#").innerHTML = wordInProgress.join(" ");
       }
     }
+  } else {
+    remainingGuesses--;
   }
 };
 
@@ -62,6 +72,10 @@ document.onkeyup = function(e) {
   if (e.keyCode >= 65 && e.keyCode <= 90) {
     currentGuess = e.key.toUpperCase();
     console.log(currentGuess);
+    document.querySelector("#current-guess").innerHTML = currentGuess;
+    // document.querySelector("#letters-guessed").innerHTML = guessedLetters.push(
+    //   currentGuess
+    // );
   }
   checkGuess(currentGuess);
 };
